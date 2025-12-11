@@ -8,7 +8,94 @@
         /* ============================
            CSS STYLING
            ============================ */
-        
+
+
+
+
+
+
+
+
+
+
+
+        /* Popup overlay */
+#winner-popup2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    overflow: hidden;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Content container */
+.winner-content2 {
+    text-align: center;
+    animation: scaleIn2 1.3s ease-in-out;
+    position: relative;
+}
+
+/* Icon image */
+.winner-img2 {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 5px solid gold;
+    margin-bottom: 20px;
+    box-shadow: 0 0 40px gold, 0 0 60px yellow;
+    background: white;
+}
+
+/* Text */
+.winner-content2 h1 {
+    font-size: 2.2em;
+    margin: 5px 0;
+    color: gold;
+    text-shadow: 0 0 10px yellow;
+}
+
+.winner-content2 h2 {
+    font-size: 1.8em;
+    margin: 5px 0;
+    color: violet;
+    text-shadow: 0 0 15px purple;
+}
+
+.winner-content2 p {
+    font-size: 1.5em;
+    margin-top: 10px;
+    color: aqua;
+    text-shadow: 0 0 12px cyan;
+}
+
+/* Scale animation */
+@keyframes scaleIn2 {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Confetti */
+.confetti2 {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    opacity: 0.9;
+    animation: fall2 linear infinite;
+}
+
+@keyframes fall2 {
+    0% { transform: translateY(-50px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+
         /* General page styling */
         * {
             margin: 0;
@@ -244,6 +331,16 @@
          HTML STRUCTURE
          ============================ -->
     
+<!-- Winner Popup -->
+<div id="winner-popup2">
+    <div class="winner-content2">
+        <img src="https://cdn-icons-png.flaticon.com/512/706/706830.png" class="winner-img2" alt="Winner Icon">
+        <h1>Muzan Ibrahim</h1>
+        <h2>The Queen of Snakes 🐍👑</h2>
+        <p>Score: 770</p>
+    </div>
+</div>
+
     <header>
         <h1>Snake Game For Batch 100 By A.A</h1>
     </header>
@@ -301,6 +398,35 @@
         </ul>
     </section>
 
+<script>
+// Show popup on page load
+window.onload = function () {
+    createConfetti2();
+
+    // Hide popup after 10 seconds
+    setTimeout(() => {
+        document.getElementById("winner-popup2").style.display = "none";
+    }, 10000);
+};
+
+// Confetti generator
+function createConfetti2() {
+    const popup = document.getElementById("winner-popup2");
+    const colors = ["gold", "aqua", "violet", "pink", "lime", "orange"];
+    for (let i = 0; i < 120; i++) {
+        let confetti = document.createElement("div");
+        confetti.classList.add("confetti2");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = Math.random() * 10 + 8 + "px";
+        confetti.style.height = Math.random() * 10 + 8 + "px";
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        popup.appendChild(confetti);
+    }
+}
+</script>
+
+</body>
     <script>
         // ============================
         // JAVASCRIPT IMPLEMENTATION
